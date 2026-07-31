@@ -18,7 +18,8 @@
       <span class="stat">🔥 <span id="stat-streak">0</span></span>
       <span class="stat">📌 <span id="stat-due">0</span></span>
       <span class="stat">✅ <span id="stat-learned">0</span></span>
-      <button id="sync-btn" class="sync-btn" title="Đồng bộ Google Drive">☁️</button>
+      <button id="sync-btn" class="sync-btn" title="Đồng bộ">☁️</button>
+      <button id="sync-settings-btn" class="sync-btn" title="Cài đặt đồng bộ">⚙️</button>
     </div>
     <div id="sync-status" class="sync-status"></div>
   </header>
@@ -118,6 +119,28 @@
   </div>
 </div>
 
+<!-- Modal cai dat dong bo GitHub -->
+<div id="sync-settings-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>⚙️ Cài đặt đồng bộ</h3>
+    <p class="hint-text">Tạo 1 repo GitHub riêng tư (private) và 1 Personal Access Token
+      (fine-grained, chỉ cấp quyền Contents Read/Write cho repo đó). Xem
+      HUONG_DAN_DONG_BO.md để biết chi tiết.</p>
+    <label>Tên tài khoản GitHub (owner)</label>
+    <input type="text" id="gh-owner" placeholder="vd: Hungnt93bn">
+    <label>Tên repo (private)</label>
+    <input type="text" id="gh-repo" placeholder="vd: sotayluyendich-data">
+    <label>Personal Access Token</label>
+    <input type="password" id="gh-token" placeholder="github_pat_...">
+    <label>Đường dẫn file đồng bộ (không cần đổi)</label>
+    <input type="text" id="gh-path" placeholder="sotayluyendich_sync.json">
+    <div class="actions">
+      <button id="sync-settings-save">💾 Lưu và đồng bộ</button>
+      <button id="sync-settings-cancel" class="secondary">Hủy</button>
+    </div>
+  </div>
+</div>
+
 <!-- Vung an, chi hien khi in (Xuat PDF = In qua trinh duyet -> Luu thanh PDF) -->
 <div id="print-area" class="print-only"></div>
 
@@ -125,7 +148,7 @@
 <script src="pinyin.js"></script>
 <script src="util.js"></script>
 <script src="db.js"></script>
-<script src="drive-sync.js"></script>
+<script src="github-sync.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

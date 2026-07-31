@@ -9,7 +9,7 @@ const ASSETS = [
   "ipa.js",
   "pinyin.js",
   "util.js",
-  "drive-sync.js",
+  "github-sync.js",
   "manifest.json",
   "data/cmu_dict.json",
   "data/pinyin_dict.json",
@@ -33,8 +33,8 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
-  // Khong cache cac request toi Google API (dong bo Drive can du lieu moi nhat)
-  if (url.hostname.includes("googleapis.com") || url.hostname.includes("google.com")) {
+  // Khong cache cac request toi GitHub API (dong bo can du lieu moi nhat)
+  if (url.hostname.includes("api.github.com")) {
     return;
   }
   event.respondWith(
