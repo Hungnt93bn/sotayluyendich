@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#3b6ef6">
+<title>Sổ Tay Luyện Dịch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header class="app-header">
+    <h1>Sổ Tay Luyện Dịch</h1>
+    <div class="stats-bar">
+      <span class="stat">🔥 <span id="stat-streak">0</span></span>
+      <span class="stat">📌 <span id="stat-due">0</span></span>
+      <span class="stat">✅ <span id="stat-learned">0</span></span>
+      <button id="sync-btn" class="sync-btn" title="Đồng bộ Google Drive">☁️</button>
+    </div>
+    <div id="sync-status" class="sync-status"></div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="add">➕</button>
+    <button class="tab-btn" data-tab="list">📋</button>
+    <button class="tab-btn" data-tab="practice">🎯</button>
+    <button class="tab-btn" data-tab="dictation">🎧</button>
+  </nav>
+
+  <!-- TAB: Them cau/tu -->
+  <section id="tab-add" class="tab-panel active">
+    <div class="type-toggle">
+      <button class="type-btn active" data-type="sentence">📝 Câu</button>
+      <button class="type-btn" data-type="word">🔤 Từ mới</button>
+    </div>
+
+    <section class="card">
+      <label id="label-vietnamese">Câu tiếng Việt</label>
+      <div class="input-row">
+        <textarea id="vietnamese" rows="2" spellcheck="false" placeholder="Nhập hoặc đọc câu tiếng Việt..."></textarea>
+        <button class="mic-btn" data-target="vietnamese" data-lang="vi-VN" title="Đọc bằng giọng nói">🎤</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <label id="label-english">Bản dịch tiếng Anh</label>
+      <div class="input-row">
+        <textarea id="english" rows="2" spellcheck="false" placeholder="Type your English translation..."></textarea>
+        <button class="mic-btn" data-target="english" data-lang="en-US" title="Speak in English">🎤</button>
+      </div>
+      <div id="en-preview" class="preview-text"></div>
+    </section>
+
+    <section class="card">
+      <label id="label-chinese">Bản dịch tiếng Trung</label>
+      <div class="input-row">
+        <textarea id="chinese" rows="2" spellcheck="false" placeholder="输入中文翻译..."></textarea>
+        <button class="mic-btn" data-target="chinese" data-lang="zh-CN" title="用中文说">🎤</button>
+      </div>
+      <div id="zh-preview" class="preview-text"></div>
+    </section>
+
+    <div class="actions">
+      <button id="copy-ai-btn" class="secondary">📋 Copy để hỏi AI</button>
+      <button id="save-btn">💾 Lưu lại</button>
+      <button id="clear-btn" class="secondary">🗑 Xóa</button>
+    </div>
+    <div id="add-status"></div>
+  </section>
+
+  <!-- TAB: Danh sach -->
+  <section id="tab-list" class="tab-panel">
+    <div class="input-row">
+      <input type="text" id="search-input" placeholder="🔍 Tìm theo tiếng Việt / Anh / Trung / pinyin...">
+    </div>
+    <div class="actions">
+      <button id="export-pdf-btn" class="button-link">📄 Xuất PDF</button>
+    </div>
+    <div id="sentence-list"></div>
+  </section>
+
+  <!-- TAB: Luyen tap -->
+  <section id="tab-practice" class="tab-panel">
+    <div id="practice-progress" class="practice-progress"></div>
+    <div id="practice-area"></div>
+  </section>
+
+  <!-- TAB: Nghe chep -->
+  <section id="tab-dictation" class="tab-panel">
+    <div class="type-toggle">
+      <button class="type-btn dictation-lang-btn active" data-lang="english">🇬🇧 Tiếng Anh</button>
+      <button class="type-btn dictation-lang-btn" data-lang="chinese">🇨🇳 Tiếng Trung</button>
+    </div>
+    <div id="dictation-stats" class="practice-progress"></div>
+    <div id="dictation-area"></div>
+  </section>
+</div>
+
+<!-- Modal sua -->
+<div id="edit-modal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Sửa</h3>
+    <label>Tiếng Việt</label>
+    <textarea id="edit-vi" rows="2" spellcheck="false"></textarea>
+    <label>Tiếng Anh</label>
+    <textarea id="edit-en" rows="2" spellcheck="false"></textarea>
+    <div id="edit-en-preview" class="preview-text"></div>
+    <label>Tiếng Trung</label>
+    <textarea id="edit-zh" rows="2" spellcheck="false"></textarea>
+    <div id="edit-zh-preview" class="preview-text"></div>
+    <div class="actions">
+      <button id="edit-save-btn">💾 Lưu</button>
+      <button id="edit-cancel-btn" class="secondary">Hủy</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vung an, chi hien khi in (Xuat PDF = In qua trinh duyet -> Luu thanh PDF) -->
+<div id="print-area" class="print-only"></div>
+
+<script src="ipa.js"></script>
+<script src="pinyin.js"></script>
+<script src="util.js"></script>
+<script src="db.js"></script>
+<script src="drive-sync.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
