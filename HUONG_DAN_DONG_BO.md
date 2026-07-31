@@ -12,26 +12,33 @@ mở trình duyệt đăng nhập mỗi lần.
 2. Đặt tên, ví dụ `sotayluyendich-data`.
 3. **Chọn "Private"** (bắt buộc — đây là nơi chứa câu/từ bạn đã lưu, không
    nên để public).
-4. Không cần tick thêm gì khác (không cần README). Bấm "Create repository".
+4. **Tick "Add a README file"** (bắt buộc — nếu để repo trống hoàn toàn,
+   không có commit nào, app sẽ báo lỗi "GitHub API lỗi 404" khi cố ghi file
+   đồng bộ lần đầu, vì chưa có nhánh `main` để ghi vào). Bấm "Create
+   repository".
 
 Repo này chỉ dùng để chứa 1 file JSON dữ liệu — không liên quan tới repo
 `sotayluyendich` (chứa code, để public để host GitHub Pages).
 
 ## 2. Tạo Personal Access Token (PAT)
 
-1. Vào https://github.com/settings/personal-access-tokens/new (hoặc
-   Settings → Developer settings → Personal access tokens → Fine-grained
-   tokens → "Generate new token").
+Dùng loại **"classic"** (đơn giản, ít lỗi vặt hơn loại "fine-grained" — loại
+fine-grained dễ bị lỗi 404 nếu chọn nhầm repo lúc tạo token, khó tự phát hiện
+ra).
+
+1. Vào https://github.com/settings/tokens → "Generate new token" → chọn
+   **"Generate new token (classic)"**.
 2. Đặt tên, ví dụ `sotayluyendich-sync`.
-3. "Expiration": chọn thời hạn tuỳ ý (ví dụ 1 năm, hoặc "No expiration" nếu
-   muốn khỏi phải tạo lại).
-4. "Repository access" → chọn "Only select repositories" → chọn đúng repo
-   `sotayluyendich-data` vừa tạo (**không** chọn repo code public).
-5. "Permissions" → mục "Repository permissions" → tìm dòng "Contents" → đổi
-   thành **"Read and write"**. Các quyền khác để mặc định "No access".
-6. Bấm "Generate token" ở cuối trang. **Copy token ngay** (dạng
-   `github_pat_...`) — GitHub chỉ hiện 1 lần, không xem lại được sau khi rời
-   trang.
+3. "Expiration": chọn thời hạn tuỳ ý (ví dụ 1 năm).
+4. Ở phần "Select scopes", tick vào ô **`repo`** ở đầu dòng (tự động tick
+   hết các ô con bên dưới) — không cần đụng các nhóm khác.
+5. Cuộn xuống cuối, bấm "Generate token". **Copy token ngay** (dạng
+   `ghp_...`) — GitHub chỉ hiện 1 lần, không xem lại được sau khi rời trang.
+
+Lưu ý: token loại classic có quyền vào **tất cả** repo của bạn (không giới
+hạn 1 repo như fine-grained) — đổi lại thiết lập đơn giản, ít lỗi hơn. Vì
+app chỉ dùng token để đọc/ghi đúng 1 file trong repo dữ liệu bạn chỉ định,
+đây là đánh đổi hợp lý cho app dùng cá nhân.
 
 ## 3. Điền cấu hình vào app máy tính
 
