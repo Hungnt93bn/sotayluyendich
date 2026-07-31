@@ -6,7 +6,7 @@
    QUAN TRONG: phai dien GOOGLE_CLIENT_ID (xem HUONG_DAN_DONG_BO.md) va PWA
    phai duoc host qua HTTPS (hoac localhost) thi GIS moi hoat dong duoc. */
 
-const GOOGLE_CLIENT_ID = "DIEN_CLIENT_ID_CUA_BAN_VAO_DAY.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = "1013076597846-sejbf5ansph56r7cnpsanoj4laqqjuu9.apps.googleusercontent.com";
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.appdata";
 const SYNC_FILE_NAME = "sotayluyendich_sync.json";
 
