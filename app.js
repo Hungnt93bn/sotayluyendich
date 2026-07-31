@@ -48,13 +48,49 @@ function wireMicButton(btn) {
 }
 document.querySelectorAll(".mic-btn").forEach(wireMicButton);
 
-/* ---------- Text-to-speech (giong doc trinh duyet) ---------- */
-function speakText(text, lang) {
+/* ---------- Text-to-speech (giong doc trinh duyet) ----------
+   Android/Chrome thuong co san 2 loai giong cho cung 1 ngon ngu: giong
+   "compact" (chay offline, chat luong thap, robot) va giong "network" (vd
+   "Google US English", tai qua mang, nghe tu nhien hon nhieu). Mac dinh
+   trinh duyet co the chon nham giong compact - chu dong chon giong network
+   tot nhat cho tung ngon ngu de de nghe hon. */
+let _voicesCache = null;
+function _loadVoices() {
+  return new Promise((resolve) => {
+    const existing = window.speechSynthesis.getVoices();
+    if (existing.length) return resolve(existing);
+    window.speechSynthesis.addEventListener(
+      "voiceschanged",
+      () => resolve(window.speechSynthesis.getVoices()),
+      { once: true }
+    );
+    // Android/Chrome doi khi khong bao gio ban "voiceschanged" - fallback
+    // sau 500ms de khong treo mai.
+    setTimeout(() => resolve(window.speechSynthesis.getVoices()), 500);
+  });
+}
+
+function _pickVoice(voices, langPrefix) {
+  const candidates = voices.filter((v) => v.lang.toLowerCase().startsWith(langPrefix));
+  if (!candidates.length) return null;
+  // Uu tien giong "network" (localService === false, thuong la giong
+  // "Google ..." chat luong cao) hon giong offline "compact".
+  const network = candidates.find((v) => v.localService === false);
+  return network || candidates[0];
+}
+
+async function speakText(text, lang) {
   if (!("speechSynthesis" in window) || !text) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
+  const langPrefix = lang === "chinese" ? "zh" : "en";
   u.lang = lang === "chinese" ? "zh-CN" : "en-US";
   u.rate = 0.9;
+
+  if (!_voicesCache) _voicesCache = await _loadVoices();
+  const voice = _pickVoice(_voicesCache, langPrefix);
+  if (voice) u.voice = voice;
+
   window.speechSynthesis.speak(u);
 }
 
