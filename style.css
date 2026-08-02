@@ -58,25 +58,41 @@ button { touch-action: manipulation; }
 .stats-bar {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 10px;
   color: var(--muted);
   font-size: 0.95rem;
   margin-bottom: 4px;
 }
 
+.stats-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sync-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
 .sync-btn {
-  margin-left: auto;
-  border: none;
-  background: transparent;
-  font-size: 1.3rem;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 1.1rem;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
+.sync-btn:active { background: var(--bg); }
 
 .sync-status {
   font-size: 0.8rem;
@@ -89,6 +105,9 @@ button { touch-action: manipulation; }
   display: flex;
   gap: 0;
   height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
   margin: 0 -14px 14px;
@@ -158,6 +177,7 @@ button { touch-action: manipulation; }
   border-radius: 12px;
   padding: 14px;
   margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 label {
@@ -182,7 +202,7 @@ textarea, input[type="text"] {
   padding: 12px 14px;
   font-size: 1.05rem;
   line-height: 1.5;
-  min-height: 70px;
+  min-height: 110px;
   font-family: inherit;
   background: var(--bg);
   color: var(--text);

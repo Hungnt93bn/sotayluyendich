@@ -13,13 +13,17 @@
 <body>
 <div class="container">
   <header class="app-header">
-    <h1>Sổ Tay Luyện Dịch <span id="build-tag" style="font-size:0.5rem;font-weight:400;opacity:0.5;vertical-align:middle;">build-2026-08-02-c</span></h1>
+    <h1>Sổ Tay Luyện Dịch <span id="build-tag" style="font-size:0.5rem;font-weight:400;opacity:0.5;vertical-align:middle;">build-2026-08-02-d</span></h1>
     <div class="stats-bar">
-      <span class="stat">🔥 <span id="stat-streak">0</span></span>
-      <span class="stat">📌 <span id="stat-due">0</span></span>
-      <span class="stat">✅ <span id="stat-learned">0</span></span>
-      <button id="sync-btn" class="sync-btn" title="Đồng bộ">☁️</button>
-      <button id="sync-settings-btn" class="sync-btn" title="Cài đặt đồng bộ">⚙️</button>
+      <div class="stats-group">
+        <span class="stat">🔥 <span id="stat-streak">0</span></span>
+        <span class="stat">📌 <span id="stat-due">0</span></span>
+        <span class="stat">✅ <span id="stat-learned">0</span></span>
+      </div>
+      <div class="sync-group">
+        <button id="sync-btn" class="sync-btn" title="Đồng bộ">☁️</button>
+        <button id="sync-settings-btn" class="sync-btn" title="Cài đặt đồng bộ">⚙️</button>
+      </div>
     </div>
     <div id="sync-status" class="sync-status"></div>
   </header>
@@ -75,7 +79,7 @@
   <!-- TAB: Danh sach -->
   <section id="tab-list" class="tab-panel">
     <div class="input-row">
-      <input type="text" id="search-input" placeholder="🔍 Tìm theo tiếng Việt / Anh / Trung / pinyin...">
+      <input type="text" id="search-input" placeholder="🔍 Tìm câu/từ...">
     </div>
     <div class="actions">
       <button id="export-pdf-btn" class="button-link">📄 Xuất PDF</button>
