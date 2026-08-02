@@ -1,5 +1,5 @@
 /* Service worker: cache toan bo file de app dung duoc offline sau lan tai dau. */
-const CACHE_NAME = "sotayluyendich-v1";
+const CACHE_NAME = "sotayluyendich-v2";
 const ASSETS = [
   "./",
   "index.html",
