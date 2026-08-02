@@ -70,8 +70,13 @@ function _loadVoices() {
   });
 }
 
-function _pickVoice(voices, langPrefix) {
-  const candidates = voices.filter((v) => v.lang.toLowerCase().startsWith(langPrefix));
+function _pickVoice(voices, exactLang, langPrefix) {
+  // Uu tien khop CHINH XAC dialect mong muon (vd "zh-CN" chuan pho thong,
+  // "en-US" chuan My) truoc khi roi xuong khop long leo theo tien to - neu
+  // khong se de bi chon nham giong Quang Dong/Anh-Anh/An Do nghe la tai.
+  const exact = voices.filter((v) => v.lang.toLowerCase() === exactLang);
+  const loose = voices.filter((v) => v.lang.toLowerCase().startsWith(langPrefix));
+  const candidates = exact.length ? exact : loose;
   if (!candidates.length) return null;
   // Uu tien giong "network" (localService === false, thuong la giong
   // "Google ..." chat luong cao) hon giong offline "compact".
@@ -83,12 +88,13 @@ async function speakText(text, lang) {
   if (!("speechSynthesis" in window) || !text) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
+  const exactLang = lang === "chinese" ? "zh-cn" : "en-us";
   const langPrefix = lang === "chinese" ? "zh" : "en";
   u.lang = lang === "chinese" ? "zh-CN" : "en-US";
   u.rate = 0.9;
 
   if (!_voicesCache) _voicesCache = await _loadVoices();
-  const voice = _pickVoice(_voicesCache, langPrefix);
+  const voice = _pickVoice(_voicesCache, exactLang, langPrefix);
   if (voice) u.voice = voice;
 
   window.speechSynthesis.speak(u);
