@@ -91,7 +91,12 @@ async function speakText(text, lang) {
   const exactLang = lang === "chinese" ? "zh-cn" : "en-us";
   const langPrefix = lang === "chinese" ? "zh" : "en";
   u.lang = lang === "chinese" ? "zh-CN" : "en-US";
-  u.rate = 0.9;
+  // Toc do 1.0 (nhip noi tu nhien) - toc do cham hon (0.8-0.9) tuy de nghe
+  // ro tung am nhung lai lam giong tong hop nghe robot/gian doan hon. Bien
+  // thien cao do rat nhe moi lan doc de tranh cam giac "doc lai y het",
+  // giong that cung khong bao gio phat am 2 lan giong het nhau 100%.
+  u.rate = 1.0;
+  u.pitch = 0.95 + Math.random() * 0.1;
 
   if (!_voicesCache) _voicesCache = await _loadVoices();
   const voice = _pickVoice(_voicesCache, exactLang, langPrefix);
