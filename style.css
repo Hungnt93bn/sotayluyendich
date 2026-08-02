@@ -31,7 +31,6 @@
 html, body {
   margin: 0;
   overflow-x: hidden;
-  overscroll-behavior-y: contain;
 }
 
 body {
@@ -48,7 +47,7 @@ button { touch-action: manipulation; }
   max-width: 640px;
   margin: 0 auto;
   padding: calc(14px + env(safe-area-inset-top)) 14px
-           calc(72px + env(safe-area-inset-bottom)) 14px;
+           calc(20px + env(safe-area-inset-bottom)) 14px;
 }
 
 .app-header h1 {
@@ -89,16 +88,11 @@ button { touch-action: manipulation; }
 .tabs {
   display: flex;
   gap: 0;
-  height: 60px;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: 56px;
   background: var(--card-bg);
-  border-top: 1px solid var(--border);
-  padding-bottom: env(safe-area-inset-bottom);
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
-  z-index: 50;
+  border-bottom: 1px solid var(--border);
+  margin: 0 -14px 14px;
+  padding: 0 14px;
 }
 
 .tab-btn {
@@ -116,7 +110,7 @@ button { touch-action: manipulation; }
   font-size: 1.3rem;
   line-height: 1;
   cursor: pointer;
-  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
 }
 
 .tab-btn .tab-label {
@@ -128,7 +122,7 @@ button { touch-action: manipulation; }
 
 .tab-btn.active {
   color: var(--primary);
-  border-top-color: var(--primary);
+  border-bottom-color: var(--primary);
 }
 
 .tab-panel { display: none; }
